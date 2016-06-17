@@ -1,0 +1,24 @@
+<div ng-controller="MyCtrl as vm">
+  <div class="heading">Enter the address to search</div>
+  <div class="search">
+    <select ng-model="vm.selectedAddress">
+      <option ng-repeat="x in vm.allocatedAddress">{{x}}</option>
+    </select>
+    <input type="button" value="search" ng-click="vm.search()">
+  </div>
+  <div ng-if="vm.showmap">
+    <ng-map zoom="13" center="{{vm.selectedAddress}}">
+      <custom-marker ng-repeat="cm in vm.customMarkers" position="{{cm.address}}" on-mouseover="mouseover()" on-mouseout="mouseout()" on-click="click()">
+        <div class="{{cm.class}}">
+          <div>{{cm.type}}</div>
+        </div>
+      </custom-marker>
+      <custom-marker position="{{vm.selectedAddress}}" on-mouseover="mouseover()" on-mouseout="mouseout()" on-click="click()">
+        <img width="50" src="http://i.imgur.com/PRDrxit.jpg"/>
+        <div class="my1">
+          <div>survey location</div>
+        </div>
+      </custom-marker>
+    </ng-map>
+  </div>
+</div>
